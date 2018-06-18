@@ -3,6 +3,7 @@
 class Cxm {
   public $debug = false;
   public $version = '0.0.1';
+  public $postData = null;
   private $trackerName = 'cxm-php';
   private $endpoint = 'tracker.cxmap.io';
   private $appKey;
@@ -49,7 +50,7 @@ class Cxm {
 
   private function trackWebSessionStart($properties = [], $data = [], $context = [], $truePerformedAt = null) {
     if (empty($properties['url']) || empty($properties['referrer']) || empty($properties['page_title'])) return false;
-    $sessionId = ($data && $data['session_id']) || uniqid('', true);
+    $sessionId = ($data && isset($data['session_id'])) ? $data['session_id'] : substr(md5(uniqid()), 0, 16);
     $data['session_id'] = $sessionId;
     $this->send('web_session_start', $properties, $data, $context, $truePerformedAt);
     return $sessionId;
@@ -79,6 +80,7 @@ class Cxm {
     if (count($properties) > 0) $data['event_properties'] = json_encode($properties);
 
     $this->putLog($data);
+    $this->postData = $data;
     
     // context
     if ($context) $data['context'] = json_encode($context);
@@ -90,7 +92,8 @@ class Cxm {
       'content' => $post,
     )
     ));
-    return file_get_contents("https://{$this->endpoint}/event", false, $opts);
+    file_get_contents("https://{$this->endpoint}/event", false, $opts);
+    return true;
   }
 
   private function putLog($post) {

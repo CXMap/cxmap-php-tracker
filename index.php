@@ -115,7 +115,7 @@ var bindScript = function(el) {
         <h2>Options</h2>
 
         <p>
-          Format: cxm(<b>[function]</b>); cxm(<b>[action]</b>); cxm(<b>[action]</b>, <b>[mixData]</b>);
+          Format: $cxm-><b>[function]</b>(<b>[mixData]</b>);
         </p>
 
         <ul>
@@ -164,7 +164,9 @@ $cxm->setPersonInfo(array(
 $cxm->track('web_session_start', array(
   'url' => 'http://site.net/page',
   'referrer' => 'http://site.net',
-  'page_title' => 'Page',
+  'page_title' => 'Page'
+),
+array(
   'session_id' => '1'
 ));</pre>
             <button onclick="bindScript(this);">Execute</button>
@@ -174,7 +176,9 @@ $cxm->track('web_session_start', array(
             <pre>$cxm->track('page_view', array(
   'url' => 'http://site.net/page',
   'referrer' => 'http://site.net',
-  'page_title' => 'Page',
+  'page_title' => 'Page'
+),
+array(
   'session_id' => '1'
 ));</pre>
             <button onclick="bindScript(this);">Execute</button>
@@ -272,7 +276,7 @@ array(
 
         <h2>Response</h2>
 
-        <div id="response">
+        <pre id="response">
 <?php
 if (!empty($_GET['eval'])) {
 
@@ -284,14 +288,12 @@ if (!empty($_GET['eval'])) {
   $cxm->track('web_session_start');
 
   $code = htmlspecialchars_decode(urldecode($_GET['eval']), ENT_QUOTES);
-  $return = eval($code);
-  print_r($return);
-  if ($return === true) echo 'ok';
-  if (!$return) echo 'fail';
+  eval($code);
+  print_r($cxm->postData);
 
 }
 ?>
-        </div>
+        </pre>
 
       </div>
     </div>

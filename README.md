@@ -63,10 +63,12 @@ $cxm->setPersonInfo(array(
 ### Session start
 
 ```
-$cxm->track('web_session_start', Array(
+$cxm->track('web_session_start', array(
   'url' => 'http://site.net/page',
   'referrer' => 'http://site.net',
-  'page_title' => 'Page',
+  'page_title' => 'Page'
+),
+array(
   'session_id' => '1'
 ));
 ```

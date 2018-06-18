@@ -68,7 +68,7 @@ class Cxm {
     $data['tracker_ver'] = $this->version;
     $data['tracker_name'] = $this->trackerName;
     if ($truePerformedAt) {
-      $data['true_performed_at'] = String($truePerformedAt);
+      $data['true_performed_at'] = (String) $truePerformedAt;
     }
 
     // person

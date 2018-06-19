@@ -238,22 +238,22 @@ array(
           </li>
           <li>
             Email sent<br />
-            <pre>$cxm->track('email_send', array('label' => 'my_compain'));</pre>
+            <pre>$cxm->track('email_sent', null, array('label' => 'my_compain'));</pre>
             <button onclick="bindScript(this);">Execute</button>
           </li>
           <li>
             Email opened<br />
-            <pre>$cxm->track('email_open', array('label' => 'my_compain'));</pre>
+            <pre>$cxm->track('email_opened', null, array('label' => 'my_compain'));</pre>
             <button onclick="bindScript(this);">Execute</button>
           </li>
           <li>
             Email clicked<br />
-            <pre>$cxm->track('email_click', array('label' => 'my_compain'));</pre>
+            <pre>$cxm->track('email_clicked', null, array('label' => 'my_compain'));</pre>
             <button onclick="bindScript(this);">Execute</button>
           </li>
           <li>
             Form submit<br />
-            <pre>$cxm->track('form_submit', array('label' => 'my_form'));</pre>
+            <pre>$cxm->track('form_submit', null, array('label' => 'my_form'));</pre>
             <button onclick="bindScript(this);">Execute</button>
           </li>
           <li>

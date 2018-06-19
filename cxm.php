@@ -43,6 +43,26 @@ class Cxm {
     else return $this->send($eventName, $properties, $data, $context, $truePerformedAt);
   }
 
+  private function trackEmailSent($properties = [], $data = [], $context = [], $truePerformedAt = null) {
+    if (empty($data['label'])) return false;
+    return $this->send('email_sent', $properties, $data, $context, $truePerformedAt);
+  }
+
+  private function trackEmailOpened($properties = [], $data = [], $context = [], $truePerformedAt = null) {
+    if (empty($data['label'])) return false;
+    return $this->send('email_opened', $properties, $data, $context, $truePerformedAt);
+  }
+
+  private function trackEmailClicked($properties = [], $data = [], $context = [], $truePerformedAt = null) {
+    if (empty($data['label'])) return false;
+    return $this->send('email_clicked', $properties, $data, $context, $truePerformedAt);
+  }
+
+  private function trackFormSubmit($properties = [], $data = [], $context = [], $truePerformedAt = null) {
+    if (empty($data['label'])) return false;
+    return $this->send('form_submit', $properties, $data, $context, $truePerformedAt);
+  }
+
   private function trackPageView($properties = [], $data = [], $context = [], $truePerformedAt = null) {
     if (empty($properties['url']) || empty($properties['referrer']) || empty($properties['page_title'])) return false;
     return $this->send('page_view', $properties, $data, $context, $truePerformedAt);

@@ -288,7 +288,6 @@ if (!empty($_GET['eval'])) {
   $uid = '1';
   $cxm = new Cxm($appKey, $uid);
   $cxm->endpoint('tracker-stage.cxmap.io');
-  $cxm->track('web_session_start');
 
   $code = htmlspecialchars_decode(urldecode($_GET['eval']), ENT_QUOTES);
   eval($code);

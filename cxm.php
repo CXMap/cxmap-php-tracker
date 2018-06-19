@@ -9,7 +9,7 @@ class Cxm {
   private $appKey;
   private $uid;
   private $person = array();
-  
+
   public function __construct($appKey, $uid) {
     $this->appKey = (string) $appKey;
     $this->uid = (string) $uid;
@@ -68,32 +68,30 @@ class Cxm {
     $data['tracker_sent_at'] = date(DATE_ISO8601, time());
     $data['tracker_ver'] = $this->version;
     $data['tracker_name'] = $this->trackerName;
-    if ($truePerformedAt) {
-      $data['true_performed_at'] = (String) $truePerformedAt;
-    }
+    if ($truePerformedAt) $data['true_performed_at'] = (String) $truePerformedAt;
 
     // person
     $data['person'] = $this->person;
-    $data['person']['uid'] = $this->uid;
+    if (!isset($this->uid)) return false;
+    $data['person']['cxm'] = $this->uid;
 
     // event properties
     if (count($properties) > 0) $data['event_properties'] = json_encode($properties);
 
-    $this->putLog($data);
-    $this->postData = $data;
-    
     // context
     if ($context) $data['context'] = json_encode($context);
+
+    $this->postData = $data;
+    $this->putLog($data);
     $post = http_build_query($data);
     $opts = stream_context_create(array(
-    'http' => array(
-      'method' => 'POST',
-      'header' => 'Content-Type: application/x-www-form-urlencoded',
-      'content' => $post,
-    )
+      'http' => array(
+        'method' => 'POST',
+        'header' => 'Content-Type: application/x-www-form-urlencoded',
+        'content' => $post
+      )
     ));
-    file_get_contents("https://{$this->endpoint}/event", false, $opts);
-    return true;
+    return file_get_contents("https://{$this->endpoint}/event", false, $opts);
   }
 
   private function putLog($post) {
@@ -106,5 +104,4 @@ class Cxm {
     $filename = dirname(__FILE__) . "/debug.log";
     return file_put_contents($filename, $row, FILE_APPEND);
   }
-
 }

@@ -200,14 +200,17 @@ $cxm->track('transaction', array(
   'total' => '100',
   'currency_iso' => 'rub',
   'items' => array(
-    'sku' => 'bb1',
-    'name' => 'Sandwich',
-    'category_id' => '1',
-    'category_name' => 'Food',
-    'price' => '50',
-    'qnt' => '2'
+    array(
+      'sku' => 'bb1',
+      'name' => 'Sandwich',
+      'category_id' => '1',
+      'category_name' => 'Food',
+      'price' => '50',
+      'qnt' => '2'
+    )
   )
 ),
+null,
 array(
   'my_payload' => 'some data'
 ));</pre>

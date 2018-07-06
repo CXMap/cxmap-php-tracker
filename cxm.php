@@ -4,6 +4,7 @@ class Cxm {
   public $debug = false;
   public $version = '0.0.1';
   public $postData = null;
+  public $sessionId = null;
   private $trackerName = 'cxm-php';
   private $endpoint = 'tracker.cxmap.io';
   private $appKey;
@@ -69,11 +70,10 @@ class Cxm {
   }
 
   private function trackWebSessionStart($properties = [], $data = [], $context = [], $truePerformedAt = null) {
-    if (empty($properties['url']) || empty($properties['referrer']) || empty($properties['page_title'])) return false;
-    $sessionId = ($data && isset($data['session_id'])) ? $data['session_id'] : substr(md5(uniqid()), 0, 16);
-    $data['session_id'] = $sessionId;
-    $this->send('web_session_start', $properties, $data, $context, $truePerformedAt);
-    return $sessionId;
+    if (empty($properties['url']) || empty($properties['referrer']) || empty($properties['page_title']) || empty($data['session_id'])) return false;
+    $this->sessionId = $data['session_id'];
+    $data['session_id'] = $data['session_id'];
+    return $this->send('web_session_start', $properties, $data, $context, $truePerformedAt);
   }
 
   private function trackUpdatePerson($person, $data = [], $context = [], $truePerformedAt = null) {

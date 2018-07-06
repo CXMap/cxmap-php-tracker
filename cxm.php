@@ -81,6 +81,11 @@ class Cxm {
     return $this->send('update_person', [], $data, $context, $truePerformedAt);
   }
 
+  private function trackCustom($person, $data = [], $context = [], $truePerformedAt = null) {
+    if (empty($properties['key'])) return false;
+    return $this->send('custom', $properties, $data, $context, $truePerformedAt);
+  }
+
   private function send($eventName, $properties, $data, $context, $truePerformedAt) {
     $data = $data ? $data : array();
     $data['app_key'] = $this->appKey;

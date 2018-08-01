@@ -5,7 +5,7 @@ class Cxm {
   public $version = '0.0.1';
   public $postData = null;
   public $sessionId = null;
-  private $trackerName = 'cxm-php';
+  private $trackerName = 'cxmap-php';
   private $endpoint = 'tracker.cxmap.io';
   private $appKey;
   private $uid;

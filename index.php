@@ -268,7 +268,7 @@ array(
           </li>
           <li>
             Custom<br />
-            <pre>$cxm->track('custom', array('key' => 'my_event'));</pre>
+            <pre>$cxm->track('custom', 'my_event');</pre>
             <button onclick="bindScript(this);">Execute</button>
           </li>
 
